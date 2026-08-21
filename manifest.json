@@ -1,0 +1,39 @@
+{
+  "name": "Myanmar 2D Live",
+  "short_name": "2D Live",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#020617",
+  "icons": [
+    {
+      "src": "https://dummyimage.com/192x192/facc15/0f172a.png&text=2D",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://dummyimage.com/512x512/facc15/0f172a.png&text=2D",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+
+**၂။ ဖိုင်နာမည်ကို `sw.js` ဟုပေးပြီး အောက်ပါစာကို ထည့်ပါ-**
+```javascript
+self.addEventListener('install', (e) => {
+    self.skipWaiting();
+});
+
+self.addEventListener('activate', (e) => {
+    e.waitUntil(self.clients.claim());
+});
+
+self.addEventListener('fetch', (e) => {
+    e.respondWith(
+        fetch(e.request).catch(() => new Response('Offline'))
+    );
+});
+
+ဒီဖိုင် (၃) ခုလုံးကို GitHub (သို့မဟုတ် အစ်ကို့ရဲ့ ActiveVPN ဆာဗာ) ပေါ်မှာ အတူတူတင်လိုက်တာနဲ့၊ Chrome ကနေ ဝင်ပြီး Install လုပ်လိုက်ရင် **Browser အတန်းကြီး လုံးဝမပါတဲ့ Standalone App အစစ်** ကို ရရှိသွားပါပြီခင်ဗျာ။ (ယခင်က လည်နေခဲ့တဲ့ Chrome Cache အဟောင်းတွေကိုတော့ ရှင်းပစ်ဖို့ မမေ့ပါနဲ့နော်)။
+
